@@ -6,17 +6,33 @@ public class Semantico implements Constants
 {
     public void executeAction(int action, Token token)	throws SemanticError
     {
-        //Interpretador.comandos.add(new Comando(Comando.Acoes.Andar, Comando.Direcoes.Norte, 10));
-        
         switch(action){
             case 1:
-                System.out.println("1: " + token.getLexeme());
+                Interpretador.fila.add(Comando.Acoes.Andar); 
+                Interpretador.comandos.add(new Comando((int)Interpretador.fila.poll(), 
+                                                        (String)Interpretador.fila.poll(), 
+                                                        (Comando.Acoes) Interpretador.fila.poll()
+                                                        ));
                 break;
             case 2:
-                System.out.println("2: " + token.getLexeme());
+                Interpretador.fila.add(Comando.Acoes.Pular); 
+                Interpretador.comandos.add(new Comando((int)Interpretador.fila.poll(), 
+                                                        (String)Interpretador.fila.poll(), 
+                                                        (Comando.Acoes) Interpretador.fila.poll()
+                                                        ));
                 break;
             case 3:
-                System.out.println("3: " + token.getLexeme());
+                Interpretador.fila.add(Comando.Acoes.Nadar); 
+                Interpretador.comandos.add(new Comando((int)Interpretador.fila.poll(), 
+                                                        (String)Interpretador.fila.poll(), 
+                                                        (Comando.Acoes) Interpretador.fila.poll()
+                                                        ));
+                break;
+            case 4:
+                Interpretador.fila.add(Integer.parseInt(token.getLexeme()));
+                break;
+            case 5:
+                Interpretador.fila.add(token.getLexeme());
                 break;
         }
     }	

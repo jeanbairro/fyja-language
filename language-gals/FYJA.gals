@@ -8,7 +8,7 @@ SemanticName = Semantico
 Package = fyja
 ScannerCaseSensitive = true
 ScannerTable = Full
-Input = String
+Input = Stream
 Parser = SLR
 #RegularDefinitions
 numint: [0-9]+
@@ -36,6 +36,6 @@ FIM: "FIM"
 #Grammar
 <A> ::= INICIO <COMS> FIM ;
 <COMS> ::= <COMS><COM> | <COM> ;
-<COM> ::= ANDAR <VALOR> PARA <DIRECAO> #2 | PULAR <VALOR> PARA <DIRECAO> | NADAR <VALOR> PARA <DIRECAO>;
-<VALOR> ::= QTD_PASSOS #1; 
-<DIRECAO> ::= DIRECAO #3;
+<COM> ::= ANDAR <VALOR> PARA <DIRECAO> #1 | PULAR <VALOR> PARA <DIRECAO>#2 | NADAR <VALOR> PARA <DIRECAO>#3;
+<VALOR> ::= QTD_PASSOS; 
+<DIRECAO> ::= DIRECAO;

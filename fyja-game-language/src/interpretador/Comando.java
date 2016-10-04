@@ -7,24 +7,27 @@ package interpretador;
 
 /**
  *
- * @author jean_
+ * @author jean_arrombadinho
  */
 public class Comando {
     public enum Acoes {
         Andar, Pular, Nadar;
     }
     
-    public enum Direcoes {
+    /*public enum Direcoes {
         Norte, Sul, Leste, Oeste;
-    }
-
-    public Comando(Acoes acao, Direcoes direcao, int quantidadePassos) {
-        
-    }
+    }*/
     
     private Acoes acao;
-    private Direcoes direcao;
+    private String direcao;
     private int quantidadePassos;
+
+    public Comando( int quantidadePassos, String direcao, Acoes acao) {
+        this.acao = acao;
+        this.direcao = direcao;
+        this.quantidadePassos = quantidadePassos;
+        
+    }
 
     public Acoes getAcao() {
         return acao;
@@ -34,11 +37,11 @@ public class Comando {
         this.acao = acao;
     }
 
-    public Direcoes getDirecao() {
-        return direcao;
+    public String getDirecao() {
+        return this.direcao;
     }
 
-    public void setDirecao(Direcoes direcao) {
+    public void setDirecao(String direcao) {
         this.direcao = direcao;
     }
 
@@ -48,5 +51,9 @@ public class Comando {
 
     public void setQuantidadePassos(int quantidadePassos) {
         this.quantidadePassos = quantidadePassos;
+    }
+    
+    public void printComando(){
+        System.out.println(this.acao+ " " + this.quantidadePassos + " para " + this.direcao);
     }
 }

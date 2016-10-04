@@ -5,9 +5,11 @@
  */
 package fyja.game.language;
 
+import interpretador.Interpretador;
+
 /**
  *
- * @author jean_
+ * @author jean_gayzinho
  */
 public class FyjaGameLanguage {
 
@@ -15,7 +17,13 @@ public class FyjaGameLanguage {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Interpretador interpretador = new Interpretador();
+        String fonte = "INICIO " +
+                "ANDAR 20 PARA SUL " + 
+                "NADAR 10 PARA NORTE " +
+                "FIM";
+        interpretador.interpretar(fonte);
+        
     }
     
 }
