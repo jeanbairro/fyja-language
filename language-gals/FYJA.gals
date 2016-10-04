@@ -5,7 +5,7 @@ Language = Java
 ScannerName = Lexico
 ParserName = Sintatico
 SemanticName = Semantico
-Package = fyja
+Package = gals
 ScannerCaseSensitive = true
 ScannerTable = Full
 Input = Stream
@@ -37,5 +37,5 @@ FIM: "FIM"
 <A> ::= INICIO <COMS> FIM ;
 <COMS> ::= <COMS><COM> | <COM> ;
 <COM> ::= ANDAR <VALOR> PARA <DIRECAO> #1 | PULAR <VALOR> PARA <DIRECAO>#2 | NADAR <VALOR> PARA <DIRECAO>#3;
-<VALOR> ::= QTD_PASSOS; 
-<DIRECAO> ::= DIRECAO;
+<VALOR> ::= QTD_PASSOS#4; 
+<DIRECAO> ::= DIRECAO#5;
