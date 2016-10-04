@@ -6,24 +6,22 @@
 package interpretador;
 import gals.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author jean_
+ * @author jean_viadinho
  */
 public class Interpretador {
+    public static Queue<Object> fila = new LinkedList<>();;
     public static List<Comando> comandos = new ArrayList<>();
     
     public void interpretar(String fonte) {        
-        fonte = "INICIO " +
-                "ANDAR 20 PARA SUL " +
-                "NADAR 10 PARA NORTE " +
-                "FIM";
-        
-        Lexico lex = new Lexico();
+        Lexico lex = new Lexico(fonte);
         Sintatico sin = new Sintatico();
         Semantico sem = new Semantico();
         
@@ -31,6 +29,10 @@ public class Interpretador {
             sin.parse(lex, sem);
         } catch (LexicalError | SyntaticError | SemanticError ex) {
             Logger.getLogger(Interpretador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < comandos.size(); i++){
+            comandos.get(i).printComando();
         }
     }
 }
