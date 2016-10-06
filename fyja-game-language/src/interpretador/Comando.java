@@ -25,8 +25,7 @@ public class Comando {
     public Comando( int quantidadePassos, String direcao, Acoes acao) {
         this.acao = acao;
         this.direcao = direcao;
-        this.quantidadePassos = quantidadePassos;
-        
+        this.quantidadePassos = quantidadePassos;   
     }
 
     public Acoes getAcao() {

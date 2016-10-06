@@ -1,1 +1,0 @@
-fyja.ScannerConstants
