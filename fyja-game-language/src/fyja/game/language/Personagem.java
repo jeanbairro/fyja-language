@@ -7,10 +7,6 @@ package fyja.game.language;
 import interpretador.Comando.Acoes;
 import java.awt.Color;
 
-/**
- *
- * @author jean_
- */
 public class Personagem {
 
     public Personagem(int posicaoX, int posicaoY) {

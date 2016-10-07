@@ -5,18 +5,14 @@
  */
 package interpretador;
 
-/**
- *
- * @author jean_arrombadinho
- */
 public class Comando {
     public enum Acoes {
         Andar, Pular, Nadar;
     }
     
-    /*public enum Direcoes {
+    public enum Direcoes {
         Norte, Sul, Leste, Oeste;
-    }*/
+    }
     
     private Acoes acao;
     private String direcao;

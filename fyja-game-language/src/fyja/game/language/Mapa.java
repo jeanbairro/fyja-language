@@ -9,67 +9,60 @@ import interpretador.Comando.Acoes;
 import java.awt.Color;
 import java.awt.Graphics;
 
-/**
- *
- * @author jean_
- */
 public class Mapa {
-    private final int linhas;
-    private final int colunas;
     private final int dados[][];
 
     public Mapa(int linhas, int colunas) {
-        this.linhas = linhas;
-        this.colunas = colunas;
-        this.dados = Globals.mapa;
+        this.dados = Globais.mapa;
     }
 
     public void renderiza(Graphics g, Personagem personagem){
-        for (int i = Globals.LINHAS_DO_MAPA - 1; i >= 0; i--) {
-            for (int j = Globals.COLUNAS_DO_MAPA - 1; j >= 0; j--) {
-                int dest_x = j * Globals.TAMANHO_DOS_TILES;
-                int dest_y = i * Globals.TAMANHO_DOS_TILES;
+        for (int i = Globais.LINHAS_DO_MAPA - 1; i >= 0; i--) {
+            for (int j = Globais.COLUNAS_DO_MAPA - 1; j >= 0; j--) {
+                int dest_x = j * Globais.TAMANHO_DOS_TILES;
+                int dest_y = i * Globais.TAMANHO_DOS_TILES;
                 
                 switch (this.dados[j][i]) {
-                    case 0:
+                    case Globais.BLOCO_BLOQUEIO:
                         g.setColor(Color.RED);
                         break;
-                    case 1:
+                    case Globais.BLOCO_TERRA:
                         g.setColor(Color.GREEN);
                         break;
-                    case 2:
+                    case Globais.BLOCO_DESTINO:
                         g.setColor(Color.WHITE);
                         break;
-                    case 3:
+                    case Globais.BLOCO_PERSONAGEM:
                         g.setColor(Color.YELLOW);
                         break;
-                    case 4:
+                    case Globais.BLOCO_AGUA:
                         g.setColor(Color.BLUE);
                         break;
-                    case 5:
+                    case Globais.BLOCO_CAMINHO:
                         g.setColor(Color.GRAY);
                         break;
                 }
                 
+                //Pinta os blocos
                 g.fillRect(dest_x, dest_y, 
-                        dest_x + Globals.TAMANHO_DOS_TILES,
-                        dest_y + Globals.TAMANHO_DOS_TILES);
+                        dest_x + Globais.TAMANHO_DOS_TILES,
+                        dest_y + Globais.TAMANHO_DOS_TILES);
                 
-                //Desenha linha
+                //Desenha linha entre os blocos
                 g.setColor(Color.GRAY);
                 g.drawRect( 
                         dest_x, dest_y, 
-                        dest_x + Globals.TAMANHO_DOS_TILES,
-                        dest_y + Globals.TAMANHO_DOS_TILES
+                        dest_x + Globais.TAMANHO_DOS_TILES,
+                        dest_y + Globais.TAMANHO_DOS_TILES
                         );
             }
         }
     }
     
     public boolean validaPosicao(Personagem personagem) throws Exception {
-        if (personagem.getPosicaoX() < 0 || personagem.getPosicaoX() > Globals.COLUNAS_DO_MAPA - 1) {
+        if (personagem.getPosicaoX() < 0 || personagem.getPosicaoX() > Globais.COLUNAS_DO_MAPA - 1) {
             return false;
-        } else if (personagem.getPosicaoY() < 0 || personagem.getPosicaoY() > Globals.LINHAS_DO_MAPA - 1) {
+        } else if (personagem.getPosicaoY() < 0 || personagem.getPosicaoY() > Globais.LINHAS_DO_MAPA - 1) {
             return false;
         } else if (dados[personagem.getPosicaoX()][personagem.getPosicaoY()] == 0){
             return false;
@@ -83,14 +76,14 @@ public class Mapa {
     }
     
     public void trocaPosicaoPersonagem(Personagem personagem) {
-         for (int i = Globals.LINHAS_DO_MAPA - 1; i >= 0; i--) {
-            for (int j = Globals.COLUNAS_DO_MAPA - 1; j >= 0; j--) {
-               if (this.dados[j][i] == 3) {
-                   this.dados[j][i] = 5;
+         for (int i = Globais.LINHAS_DO_MAPA - 1; i >= 0; i--) {
+            for (int j = Globais.COLUNAS_DO_MAPA - 1; j >= 0; j--) {
+               if (this.dados[j][i] == Globais.BLOCO_PERSONAGEM) {
+                   this.dados[j][i] = Globais.BLOCO_CAMINHO;
                } 
             }
          }
          
-         this.dados[personagem.getPosicaoX()][personagem.getPosicaoY()] = 3;
+         this.dados[personagem.getPosicaoX()][personagem.getPosicaoY()] = Globais.BLOCO_PERSONAGEM;
     }
 }

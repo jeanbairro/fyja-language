@@ -5,17 +5,13 @@
  */
 package fyja.game.language;
 
-/**
- *
- * @author jean_
- */
 public class Tela extends javax.swing.JFrame {
 
     private FyjaGameLanguage game;
     
     public Tela() {
         initComponents();
-        setSize(Globals.LARGURA_DA_TELA, Globals.ALTURA_DA_TELA + Globals.ALTURA_DO_FOOTER);
+        setSize(Globais.LARGURA_DA_TELA, Globais.ALTURA_DA_TELA + Globais.ALTURA_DO_FOOTER);
         setResizable(false);
         setTitle("Fyja Language");
         game = new FyjaGameLanguage(this);

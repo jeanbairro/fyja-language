@@ -10,12 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- *
- * @author jean_viadinho
- */
 public class Interpretador {
-    public static Queue<Object> fila = new LinkedList<>();;
+    public static Queue<Object> filaInterpretacao = new LinkedList<>();
     public static List<Comando> comandos = new ArrayList<>();
     
     public void interpretar(String fonte) throws LexicalError, SyntaticError, SemanticError {        

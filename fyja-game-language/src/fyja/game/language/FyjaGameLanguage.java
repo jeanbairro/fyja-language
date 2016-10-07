@@ -10,37 +10,30 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 import interpretador.Interpretador;
-import java.awt.Color;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-/**
- *
- * @author _jean
- */
 public class FyjaGameLanguage implements Runnable {
     private Mapa mapa;
-    private final Component tela;
+    private Component tela;
     private Image buffer;
     private Personagem personagem;
 
     public FyjaGameLanguage(Component tela) {
         this.tela = tela;
+        /* Atribui posição inicial na construção */
         this.personagem = new Personagem(19, 19);
     }
     
-    public void desenhaTela() {
+    private void desenhaTela() {
         this.mapa.renderiza(buffer.getGraphics(), personagem);
-        
         Graphics g = this.tela.getGraphics();
-        if (g != null) {
-            g.drawImage(buffer, 0, 0, null);
-            g.dispose();
-        }
+        g.drawImage(buffer, 0, 0, null);
     }
     
-    public void movePersonagem() throws Exception {
+    private void movePersonagem() throws Exception {
         Comando comando = Interpretador.comandos.get(0);
         
         if (comando.getQuantidadePassos() < 0){
@@ -52,7 +45,6 @@ public class FyjaGameLanguage implements Runnable {
         
         switch(comando.getAcao()){
             case Andar:
-                personagem.setCor(Color.YELLOW);
                 personagem.setAcaoNoMomento(Comando.Acoes.Andar);
                 personagem.percorrer(comando.getDirecao());
                 if (mapa.validaPosicao(personagem)){
@@ -63,7 +55,6 @@ public class FyjaGameLanguage implements Runnable {
                 }
                 break;
             case Nadar:
-                personagem.setCor(Color.MAGENTA);
                 personagem.setAcaoNoMomento(Comando.Acoes.Nadar);
                 personagem.percorrer(comando.getDirecao());
                 if (mapa.validaPosicao(personagem)){
@@ -74,7 +65,6 @@ public class FyjaGameLanguage implements Runnable {
                 }
                 break;
             case Pular:
-                personagem.setCor(Color.PINK);
                 personagem.setAcaoNoMomento(Comando.Acoes.Pular);
                 personagem.pular(comando.getDirecao(), comando.getQuantidadePassos());
                 if (mapa.validaPosicao(personagem)){
@@ -89,9 +79,9 @@ public class FyjaGameLanguage implements Runnable {
 
     @Override
     public void run() {
-        this.mapa = new Mapa(Globals.LINHAS_DO_MAPA, Globals.COLUNAS_DO_MAPA);
+        this.mapa = new Mapa(Globais.LINHAS_DO_MAPA, Globais.COLUNAS_DO_MAPA);
         this.buffer = tela.getGraphicsConfiguration().createCompatibleImage(
-                Globals.LARGURA_DA_TELA, Globals.ALTURA_DA_TELA);
+                Globais.LARGURA_DA_TELA, Globais.ALTURA_DA_TELA);
         Interpretador interpretador = new Interpretador();
         
         try {
@@ -99,14 +89,14 @@ public class FyjaGameLanguage implements Runnable {
             JTextArea textArea = new JTextArea(20, 20);
             switch (JOptionPane.showConfirmDialog(null, new JScrollPane(textArea))) {
                 case JOptionPane.OK_OPTION:
-                    interpretador.interpretar(textArea.getText());
+                    interpretador.interpretar(textArea.getText().toUpperCase());
             }
             
             while (!Interpretador.comandos.isEmpty()) {
                 desenhaTela();
                 movePersonagem();
-                Thread.sleep(125
-                );
+                /* Pra movimentação ficar mais lenta */
+                Thread.sleep(125);
             }            
         } catch (Exception ex){
             JOptionPane.showMessageDialog(tela, "Você informou um caminho inválido. Detalhes: "+ex.getMessage());
